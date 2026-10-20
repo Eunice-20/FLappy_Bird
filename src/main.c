@@ -14,7 +14,12 @@ int main(void)
     // L'oiseau
     Vector2 birdPosi = { 200, haut_ecran / 2.0f };
     float birdVitesse = 0.0f;
-    const float vitesseX = 5.0f;
+    float vitesseX = 0.0f;
+    //--------------------------------
+    const float accelerationX = 0.3f;   // à quelle vitesse on accélère
+    const float slow_down_brid = 0.95f;     //  
+    const float vitesseMaxX = 6.0f;  
+    //--------------------------------
     const float birdRayon = 20.0f;
     const float gravite = 0.5f;
     const float birdsaut = -8.0f;   // négatif = vers le haut
@@ -22,8 +27,24 @@ int main(void)
     while (!WindowShouldClose())
     {
         // option : l'oiseau peut se déplacer horizontalement 
-        if (IsKeyDown(KEY_RIGHT)) birdPosi.x += vitesseX;
-        if (IsKeyDown(KEY_LEFT))  birdPosi.x -= vitesseX;
+        if (IsKeyDown(KEY_RIGHT)) vitesseX  += accelerationX;
+        if (IsKeyDown(KEY_LEFT))  vitesseX -= accelerationX;
+//--------------------------------------------------------------------------- a corriger , ralenttisement l'oiseau  trop rapide
+        vitesseX *= slow_down_brid; // ralentissement de l'oiseau
+
+        if (vitesseX > vitesseMaxX) vitesseX = vitesseMaxX;
+        if (vitesseX < -vitesseMaxX) vitesseX = -vitesseMaxX;
+
+        birdPosi.x += vitesseX; // déplacement
+
+        if (birdPosi.x > larg_ecran - birdRayon) {
+            birdPosi.x = larg_ecran - birdRayon;
+            vitesseX = 0;
+        }
+        if (birdPosi.x < birdRayon) {
+            birdPosi.x = birdRayon;
+            vitesseX = 0;
+        }
 
          // pour l'empêcher de sortir de l'écran horizontal
         if (birdPosi.x > larg_ecran - birdRayon) {
@@ -32,6 +53,7 @@ int main(void)
         if (birdPosi.x < birdRayon) {
             birdPosi.x = birdRayon;
         }
+//---------------------------------------------------------------------------
 
         // mise à jour de la physique de l'oiseau pour gere son deplacement dans l'nvironement
         if (IsKeyPressed(KEY_UP)) birdVitesse = birdsaut;

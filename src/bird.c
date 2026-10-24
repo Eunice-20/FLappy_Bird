@@ -25,15 +25,16 @@ void DessinerBird(Bird bird)
 
 void MajBird(Bird *bird, int larg_ecran, int haut_ecran)
 {
-    // déplacement pas lent
+    // déplacement PAS lent
     if (IsKeyPressed(KEY_RIGHT)) bird->cibleX += PAS_X; // add 40 unités à cibleX à chaque appui
     if (IsKeyPressed(KEY_LEFT))  bird->cibleX -= PAS_X; 
 
     if (bird->cibleX > larg_ecran - bird->rayon) 
      { bird->cibleX = larg_ecran - bird->rayon;}
     
-    if (bird->cibleX < bird->rayon) 
-     { bird->cibleX = bird->rayon;}
+    //if (bird->cibleX < bird->rayon) 
+    // { bird->cibleX = bird->rayon;}
+    if (bird->cibleX < 100) bird->cibleX = 100;   // margeG
 
     bird->posi.x += (bird->cibleX - bird->posi.x) * DOUCEUR_X;
 

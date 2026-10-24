@@ -10,7 +10,7 @@ typedef struct {
     float rayon;             
 } Bird;
 
-Bird CreerBird(float x, float y);
-void DessinerBird(Bird bird);
+Bird CreerBird(float x, float y); 
+void DessinerBird(Bird bird); 
 void MajBird(Bird *bird, int larg_ecran, int haut_ecran);
 #endif

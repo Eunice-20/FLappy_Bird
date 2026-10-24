@@ -14,11 +14,11 @@ int main(void)
     // L'oiseau
     Vector2 birdPosi = { 200, haut_ecran / 2.0f };
     float birdVitesse = 0.0f;
-    float vitesseX = 0.0f;
+    float tempsSansGravite = 0.0f; 
+     float cibleX = birdPosi.x;    
     //--------------------------------
-    const float accelerationX = 0.3f;   // à quelle vitesse on accélère
-    const float slow_down_brid = 0.95f;     //  
-    const float vitesseMaxX = 6.0f;  
+    const float douceurX = 0.2f;        
+    const float pasX = 40.0f; // un pas 
     //--------------------------------
     const float birdRayon = 20.0f;
     const float gravite = 0.5f;
@@ -27,38 +27,53 @@ int main(void)
     while (!WindowShouldClose())
     {
         // option : l'oiseau peut se déplacer horizontalement 
-        if (IsKeyDown(KEY_RIGHT)) vitesseX  += accelerationX;
-        if (IsKeyDown(KEY_LEFT))  vitesseX -= accelerationX;
-//--------------------------------------------------------------------------- a corriger , ralenttisement l'oiseau  trop rapide
-        vitesseX *= slow_down_brid; // ralentissement de l'oiseau
+        if (IsKeyPressed(KEY_RIGHT)) cibleX += pasX;
+        if (IsKeyPressed(KEY_LEFT))  cibleX -= pasX;
 
-        if (vitesseX > vitesseMaxX) vitesseX = vitesseMaxX;
-        if (vitesseX < -vitesseMaxX) vitesseX = -vitesseMaxX;
+        if (cibleX > larg_ecran - birdRayon) cibleX = larg_ecran - birdRayon;
+        if (cibleX < birdRayon) cibleX = birdRayon;
 
-        birdPosi.x += vitesseX; // déplacement
+        // l'oiseau avance un peu vers la cible à chaque image
+        birdPosi.x += (cibleX - birdPosi.x) * douceurX;
 
-        if (birdPosi.x > larg_ecran - birdRayon) {
-            birdPosi.x = larg_ecran - birdRayon;
-            vitesseX = 0;
-        }
-        if (birdPosi.x < birdRayon) {
-            birdPosi.x = birdRayon;
-            vitesseX = 0;
-        }
-
-         // pour l'empêcher de sortir de l'écran horizontal
+    // pour l'empêcher de sortir de l'écran horizontal  
         if (birdPosi.x > larg_ecran - birdRayon) {
             birdPosi.x = larg_ecran - birdRayon;
         }
         if (birdPosi.x < birdRayon) {
             birdPosi.x = birdRayon;
         }
+
 //---------------------------------------------------------------------------
 
-        // mise à jour de la physique de l'oiseau pour gere son deplacement dans l'nvironement
-        if (IsKeyPressed(KEY_UP)) birdVitesse = birdsaut;
+     // mise à jour de la physique de l'oiseau pour gere son deplacement dans l'nvironement
+         //if (IsKeyPressed(KEY_UP)|| IsKeyPressed(KEY_SPACE)) birdVitesse = birdsaut;
+         //birdVitesse += gravite;
 
-        birdVitesse += gravite;
+        bool deplacementLen = IsKeyDown(KEY_LEFT) || IsKeyDown(KEY_RIGHT);
+            
+        if (deplacementLen)
+            {
+                tempsSansGravite = 1.0f;   
+                birdVitesse = 0.0f;        //  hauteur fixe 1s
+            }
+            else if (tempsSansGravite > 0.0f)
+            {
+                tempsSansGravite -= GetFrameTime(); // chronomètre 
+                birdVitesse = 0.0f; 
+            }
+            else
+            {
+                birdVitesse += gravite; 
+            }
+
+            // le saut reste prioritaire
+            if (IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_SPACE))
+            {
+                birdVitesse = birdsaut;
+                tempsSansGravite = 0.0f;
+            }   
+
         birdPosi.y += birdVitesse; // deplacement de l'oiseau
 
         // ppour l'empêcher de sortir de l'écran vertical
@@ -73,7 +88,7 @@ int main(void)
             birdVitesse = 0;
         }
 
-        // dessin  simulation de l'oiseau et du texte sur l'écran
+        // dessin  simulation de l'oiseau/textes
         BeginDrawing();
         ClearBackground((Color){ 64, 224, 208, 255 });
 

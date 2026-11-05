@@ -34,7 +34,7 @@ void MajBird(Bird *bird, int larg_ecran, int haut_ecran)
     
     //if (bird->cibleX < bird->rayon) 
     // { bird->cibleX = bird->rayon;}
-    if (bird->cibleX < 100) bird->cibleX = 100;   // margeG
+    if (bird->cibleX < 200) bird->cibleX = 200;   // margeG
 
     bird->posi.x += (bird->cibleX - bird->posi.x) * DOUCEUR_X;
 

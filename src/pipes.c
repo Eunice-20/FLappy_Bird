@@ -15,9 +15,9 @@ Pipe CreerPipe(int larg_ecran)
 // Dessine les deux parties du tuyau
 void DessinerPipe(Pipe pipes, int haut_ecran)
 {
-    // haut : de 0 jusqu'au début du trou
+    // haut=>de 0 jusqu'au début du trou
     DrawRectangle(pipes.x, 0, pipes.largTu, pipes.HtrouY, BROWN );
-    // bas : de la fin du trou jusqu'en bas de l'écran
+    // bas=> de la fin du trou jusqu'en bas de l'écran
     DrawRectangle(pipes.x, pipes.HtrouY + pipes.trouHaut, pipes.largTu, haut_ecran - pipes.HtrouY - pipes.trouHaut, BROWN);
 }
 
@@ -30,7 +30,7 @@ void MajPipe(Pipe *pipes, int larg_ecran, int haut_ecran)
     if (pipes->x < -pipes->largTu)
     {
         pipes->x = larg_ecran;
-        // nouveau trou à une hauteur random
+        // nouveau trou hauteur random
         pipes->HtrouY = GetRandomValue(80, haut_ecran - 80 - (int)pipes->trouHaut);
     }
 }

@@ -11,15 +11,21 @@
 #define NB_BLOCS 4
 #define ESPACE_BLOCS 220
 //------------------------
-#define NB_FLECHES 10
+#define NB_FLECHES 6
+//------------------------
+#define NB_IMAGES 4          
 
 int main(void)
 {
-    const int larg_ecran = 800;
-    const int haut_ecran = 600;
-    float decorX = 0;   
+    const int larg_ecran = 1000;
+    const int haut_ecran = 800;
+    float decorX = 0;
+    float tempsAnim = 0;  
+    int imageActuelle = 0; 
 
     InitWindow(larg_ecran, haut_ecran, "Flappy Bird");
+    Texture2D texOiseau = LoadTexture("assets/Birds_Paid_Carysaurus/YellowBird/YellowBird-Fly.png");
+    SetTextureFilter(texOiseau, TEXTURE_FILTER_POINT);
     SetTargetFPS(60);
 
     Font Police_Df = LoadFontEx("Police_Dafont/LSD.otf", 64, 0, 0);
@@ -45,6 +51,7 @@ int main(void)
     }
    // fleches[i] = CreerFleche(i, NB_FLECHES, larg_ecran);
     
+
     while (!WindowShouldClose()){
         MajBird(&bird, larg_ecran, haut_ecran);      
         MajGame(&game);
@@ -101,6 +108,11 @@ int main(void)
         }
         //--------------------------------------------------------------------------------------------------------------------------------- 
 
+        tempsAnim += GetFrameTime();
+        if (tempsAnim >= 0.08f) {
+            tempsAnim = 0;
+            imageActuelle = (imageActuelle + 1) % NB_IMAGES;
+        }
         BeginDrawing();
         ClearBackground((Color){ 64, 224, 208, 255 });
 
@@ -124,12 +136,18 @@ int main(void)
                 DessinerFleche(fleches[i]);
         }
 
-        DessinerBird(bird);
+        int largImage = texOiseau.width / NB_IMAGES;
+        Rectangle source = { imageActuelle * largImage, 0, largImage, texOiseau.height };
+        float zoom = 3;
+        Rectangle dest = { bird.posi.x, bird.posi.y, largImage * zoom, texOiseau.height * zoom };
+        Vector2 centre = { dest.width / 2, dest.height / 2 };
+        DrawTexturePro(texOiseau, source, dest, centre, 0, WHITE);
         DrawTextEx(Police_Df, "Espace Game Bird", (Vector2){ 20, 20 }, 24, 2, PINK);
         DrawTextEx(Police_Df, TextFormat("%d m - Niveau %d", (int)game.distance, game.niveau), (Vector2){ 20, 50 }, 24, 2, PINK);
         EndDrawing();
     }
 
+    UnloadTexture(texOiseau);
     UnloadFont(Police_Df);
     CloseWindow();
     return 0;

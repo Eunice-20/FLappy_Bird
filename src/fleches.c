@@ -12,9 +12,9 @@ Fleche CreerFleche(int colonne, int nbColonnes, int larg_ecran)
 
 void MajFleche(Fleche *fleche, int larg_ecran, int haut_ecran)
 {
-    fleche->posi.y += fleche->vitesseCh * GetFrameTime();   // elle tombe tout droit
+    fleche->posi.y += fleche->vitesseCh * GetFrameTime();   // tombe tout droit
     if (fleche->posi.y - 60 > haut_ecran) {
-        fleche->posi.y = GetRandomValue(-600, -50);  // elle remonte, dans la même colonne
+        fleche->posi.y = GetRandomValue(-1200, -50);  // remonte, dans la même colonne
         fleche->vitesseCh = GetRandomValue(200, 350);
     }
 }

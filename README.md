@@ -33,3 +33,7 @@ gcc src/main.c src/bird.c src/pipes.c src/game.c src/blocs.c src/fleches.c -o fl
 - Création du niveau 3 avec 3 flèches, changement de décor pour le niveau extrême, déplacements horizontaux et verticaux des obstacles
 
 ![Démo de Flappy Bird - Fleche](IMG-VIDEO_MD/mintty_DhzawSjD9B.gif)
+
+- Améliorer le visuel, ajouter un oiseau animé, agrandir l’écran pour afficher tout le texte et réduire les flèches.
+
+![Démo de Flappy Bird - annimation bird](IMG-VIDEO_MD/mintty_Q90dqfiMGD.gif)

@@ -7,7 +7,7 @@ Pipe CreerPipe(int larg_ecran)
     pipes.x = larg_ecran;
     pipes.HtrouY = 250;
     pipes.largTu = 70;
-    pipes.trouHaut = 160;
+    pipes.trouHaut = 190;
     pipes.vitesseD = 1.0f;
     return pipes;
 }

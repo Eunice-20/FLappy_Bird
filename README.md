@@ -6,9 +6,17 @@ pour mise a jour du code
 ```
 gcc src/main.c src/bird.c src/pipes.c src/game.c src/blocs.c src/fleches.c -o flappy.exe $(pkg-config --cflags --libs raylib) -lopengl32 -lgdi32 -lwinmm
 ```
+ou
+```
+make
+```
  lancement du jeux
 ```
 ./flappy.exe
+```
+ou 
+```
+make run
 ```
 - Gestion fenêtres sur une interface graphique (GUI)
 
@@ -34,6 +42,6 @@ gcc src/main.c src/bird.c src/pipes.c src/game.c src/blocs.c src/fleches.c -o fl
 
 ![Démo de Flappy Bird - Fleche](IMG-VIDEO_MD/mintty_DhzawSjD9B.gif)
 
-- Améliorer le visuel, ajouter un oiseau animé, agrandir l’écran pour afficher tout le texte et réduire les flèches.
+- Amélioration du visuel, ajoute un oiseau animé,  écran agrandi et réduire les flèches
 
 ![Démo de Flappy Bird - annimation bird](IMG-VIDEO_MD/mintty_Q90dqfiMGD.gif)

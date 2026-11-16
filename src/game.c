@@ -15,6 +15,6 @@ void MajGame(Game *game)
     game->distance += 10.0f * GetFrameTime();   // 10 mètres par seconde
 
     if (game->distance >= 200) game->niveau = 3;
-    else if (game->distance >= 100) game->niveau = 2;
+    else if (game->distance >= 200) game->niveau = 2;
     else game->niveau = 1;
 }

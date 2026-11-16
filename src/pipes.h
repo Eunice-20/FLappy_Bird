@@ -11,6 +11,6 @@ typedef struct {
 } Pipe;
 
 Pipe CreerPipe(int larg_ecran);
-void DessinerPipe(Pipe pipes, int haut_ecran);
+void DessinerPipe(Pipe pipes, int haut_ecran, Texture2D tex);
 void MajPipe(Pipe *pipes, int larg_ecran, int haut_ecran);
 #endif

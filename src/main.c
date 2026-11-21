@@ -36,11 +36,14 @@ int main(void)
     Texture2D texOiseau = LoadTexture("assets/Birds_Paid_Carysaurus/YellowBird/YellowBird-Fly.png");
     SetTextureFilter(texOiseau, TEXTURE_FILTER_POINT);
 
-    Texture2D texSol = LoadTexture("assets/Sky_Islands/tiles_meadow.png");
+    Texture2D texSol = LoadTexture("assets/hurt_bird/tiles_meadow.png");
     SetTextureFilter(texSol, TEXTURE_FILTER_POINT);
 
-    Texture2D texTuyau = LoadTexture("assets/Sky_Islands/pipe.png");
+    Texture2D texTuyau = LoadTexture("assets/hurt_bird/pipe.png");
     SetTextureFilter(texTuyau, TEXTURE_FILTER_POINT);
+
+    Texture2D texFleche = LoadTexture("assets/hurt_bird/fleche-pixel-art.png");
+    SetTextureFilter(texFleche, TEXTURE_FILTER_POINT);
 
 
     SetTargetFPS(60);
@@ -77,7 +80,7 @@ int main(void)
             float ySolLimite = haut_ecran -  limiteSol;
             //------------------------------------
             // la moitié de la hauteur de l'oiseau 
-            float demiOiseau = texOiseau.height * 3 / 2.0f;
+            float demiOiseau = texOiseau.height * 1.5f/ 2;
             //-------------------------------------
 
             if (bird.posi.y > ySolLimite - demiOiseau) {
@@ -178,13 +181,16 @@ int main(void)
                 DessinerBloc(blocs[i]);
         }
         if (game.niveau == 3) {
-            for (int i = 0; i < NB_FLECHES; i++)
-                DessinerFleche(fleches[i]);
+            for (int i = 0; i < NB_FLECHES; i++){ 
+
+                Rectangle src = { 0, 0, texFleche.width, texFleche.height };
+                DrawTexturePro(texFleche, src, RectFleche(fleches[i]), (Vector2){ 0, 0 }, 0, WHITE);
+            }
         }
 
         int largImage = texOiseau.width / NB_IMAGES;
         Rectangle source = { imageActuelle * largImage, 0, largImage, texOiseau.height };
-        float zoom = 3;
+        float zoom = 1.5f;
         Rectangle dest = { bird.posi.x, bird.posi.y, largImage * zoom, texOiseau.height * zoom };
         Vector2 centre = { dest.width / 2, dest.height / 2 };
         DrawTexturePro(texOiseau, source, dest, centre, 0, WHITE);
@@ -197,6 +203,7 @@ int main(void)
     UnloadTexture(texOiseau);
     UnloadTexture(texSol);
     UnloadTexture(texTuyau);
+    UnloadTexture(texFleche);
     UnloadFont(Police_Df);
     CloseWindow();
     return 0;

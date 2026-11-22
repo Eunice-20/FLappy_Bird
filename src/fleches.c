@@ -13,7 +13,7 @@ Fleche CreerFleche(int colonne, int nbColonnes, int larg_ecran)
 void MajFleche(Fleche *fleche, int larg_ecran, int haut_ecran)
 {
     fleche->posi.y += fleche->vitesseCh * GetFrameTime();   // tombe tout droit
-    if (fleche->posi.y - 60 > haut_ecran) {
+    if (fleche->posi.y - 120 > haut_ecran) {
         fleche->posi.y = GetRandomValue(-1200, -50);  // remonte, dans la même colonne
         fleche->vitesseCh = GetRandomValue(200, 350);
     }
@@ -22,7 +22,7 @@ void MajFleche(Fleche *fleche, int larg_ecran, int haut_ecran)
 // Le rectangle qui sert aux collisions
 Rectangle RectFleche(Fleche fleche)
 {
-    return (Rectangle){ fleche.posi.x - 6, fleche.posi.y - 60, 12, 60 };
+    return (Rectangle){ fleche.posi.x - 12, fleche.posi.y - 120, 24, 120 };
 }
 
 void DessinerFleche(Fleche fleche)

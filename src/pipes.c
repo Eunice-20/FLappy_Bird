@@ -8,8 +8,8 @@ Pipe CreerPipe(int larg_ecran)
     pipes.HtrouY = 250;
     pipes.largTu = 140;
     pipes.trouHaut = 130;
-    pipes.vitesseD = 1.0f;
-    return pipes;
+    pipes.vitesseD = 2.0f; 
+ return pipes; 
 }
 
 // Dessine les deux parties du tuyau

@@ -1,6 +1,6 @@
 #include "bird.h"
 #define GRAVITE    0.5f
-#define SAUT      -8.0f
+#define SAUT      -6.5f
 #define PAS_X     40.0f
 #define DOUCEUR_X  0.2f
 

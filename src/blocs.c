@@ -3,7 +3,7 @@
 Bloc CreerBloc(int larg_ecran, int haut_ecran)
 {
     Bloc bloc;
-    float taille = GetRandomValue(50, 90);
+    float taille = GetRandomValue(100, 160);
     bloc.rect = (Rectangle){ larg_ecran, GetRandomValue(0, haut_ecran - taille), taille, taille };
     bloc.vitesse = 200.0f;
     return bloc;

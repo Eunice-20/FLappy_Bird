@@ -45,3 +45,8 @@ make run
 - Amélioration du visuel, ajoute un oiseau animé,  écran agrandi et réduire les flèches
 
 ![Démo de Flappy Bird - annimation bird](IMG-VIDEO_MD/mintty_Q90dqfiMGD.gif)
+
+- Amélioration du visuel de l'enviroment deu jeux, ajout image
+
+
+![Démo de Flappy Bird - design environement](IMG-VIDEO_MD/flappy_Z3wEWMINq6.gif)
